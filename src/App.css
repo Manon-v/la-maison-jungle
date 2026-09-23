@@ -8,10 +8,12 @@
 }
 
 body {
-  max-width: 1240px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 20px;
 }
+
+
 
 /* Header */
 .header {
@@ -177,4 +179,18 @@ body {
     left: 16px;
     text-align: left;
   }
+}
+
+.collapse-arrow {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(45deg);
+  transition: transform 0.3s ease;
+  margin-right: 5px;
+}
+
+.collapse-arrow.open {
+  transform: rotate(225deg);
 }

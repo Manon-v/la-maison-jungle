@@ -24,9 +24,7 @@ export default function Collapse({ title, children, content }) {
     <div className="collapse">
       <div className="collapse-banner" onClick={toggleCollapse}>
         <h2>{title}</h2>
-        <span className={`arrow ${isOpen ? 'open' : ''}`}>
-          {isOpen ? '▲' : '▼'}
-        </span>
+       <span className={`collapse-arrow ${isOpen ? 'open' : ''}`}></span>
       </div>
       {isOpen && (
         <div className="collapse-content">
