@@ -3,36 +3,40 @@ import logements from '../logements.json'
 import Slideshow from '../components/Slideshow'
 import Collapse from '../components/Collapse'
 import './Housing.css'
-
+// Composant qui affiche la page détaillée d'un logement
 export default function Housing() {
+  // Récupération de l'id du logement présent dans l'URL
   const { id } = useParams()
 
- 
+ // Recherche du logement correspondant à l'id dans le fichier JSON
   const logement = logements.find((item) => item.id === id)
 
-  
+   // Si aucun logement ne correspond à l'id, redirection vers la page 404
   if (!logement) {
   return <Navigate to="/404" replace />
 }
-
+// Tableau utilisé pour afficher les 5 étoiles de notation
   const range = [1, 2, 3, 4, 5]
 
   return (
     <div className="housing-page">
+  {/* Affichage du diaporama avec les photos du logement */}
       <Slideshow pictures={logement.pictures} />
-
+  {/* Informations principales du logement */}
       <div className="housing-header">
         <div className="housing-title-container">
           <h1>{logement.title}</h1>
           <p className="housing-location">{logement.location}</p>
+          {/* Affichage des différents tags du logement */}
           <div className="housing-tags">
             {logement.tags.map((tag, index) => (
               <span key={index} className="tag">{tag}</span>
             ))}
           </div>
         </div>
-
+ {/* Informations sur l'hôte et note du logement */}
         <div className="housing-host-rating">
+          {/* Affichage du nom et de la photo de l'hôte */}
           <div className="host-info">
             <p>
               {logement.host.name.split(' ')[0]} <br />
@@ -40,6 +44,7 @@ export default function Housing() {
             </p>
             <img src={logement.host.picture} alt={logement.host.name} />
           </div>
+           {/* Affichage de la note sur 5 sous forme d'étoiles */}
           <div className="rating">
             {range.map((elem) => (
               <svg
@@ -59,12 +64,13 @@ export default function Housing() {
           </div>
         </div>
       </div>
-
+  {/* Informations complémentaires affichées dans des Collapse */}
       <div className="housing-collapses">
+   {/* Description du logement */}
         <Collapse title="Description">
           <p>{logement.description}</p>
         </Collapse>
-        
+   {/* Liste des équipements disponibles */}
         <Collapse title="Équipements">
           <ul>
             {logement.equipments.map((equipment, index) => (

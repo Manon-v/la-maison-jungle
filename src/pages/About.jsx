@@ -1,8 +1,9 @@
 import Banner from '../components/Banner'
 import Collapse from '../components/Collapse'
 import aboutBanner from '../assets/banner-about.png'
-
+// Composant de la page À Propos
 export default function About() {
+   // Données utilisées pour créer les différents Collapse
   const aboutData = [
     {
       title: 'Fiabilité',
@@ -24,8 +25,10 @@ export default function About() {
 
   return (
     <div className="about-page">
+      {/* Affichage de la bannière de la page À Propos */}
       <Banner image={aboutBanner} />
       <div className="about-collapses">
+        {/* Parcours des données pour créer un Collapse pour chaque élément */}
         {aboutData.map((item, index) => (
           <Collapse key={index} title={item.title} content={item.content} />
         ))}

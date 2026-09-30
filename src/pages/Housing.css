@@ -1,3 +1,4 @@
+/* Conteneur principal de la page logement */
 .housing-page {
   max-width: 1240px;
   margin: 0 auto;
@@ -13,14 +14,14 @@
   margin-bottom: 20px;
   
 }
-
+/* Conteneur du titre et de la localisation */
 .housing-title-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
 }
-
+/* Titre du logement */
 .housing-title-container h1 {
   color: #FF6060;
   font-size: 36px;
@@ -28,16 +29,16 @@
   margin: 0 0 5px 0;
   text-align: left;
   font-family: 'Montserrat', sans-serif;
-  margin-bottom: 10px;
+  
 }
-
+/* Localisation du logement */
 .housing-location {
   font-size: 18px;
   font-weight: 500;
-  margin: 0 0 18px 0;
+  margin: 0 0 20px 0;
   color: #000000;
   text-align: left;
-  margin-bottom: 20px;
+  
 }
 
 /* Tags */
@@ -47,7 +48,7 @@
   gap: 10px;
   justify-content: flex-start;
 }
-
+/* Style de chaque tag */
 .tag {
   background-color: #FF6060;
   color: #FFFFFF;
@@ -70,30 +71,34 @@
   justify-content: space-between;
   gap: 20px;
 }
-
+/* Affichage des étoiles de notation */
 .rating {
   display: flex;
-  gap: 10px;
+  gap: 5px;
 }
 
+/* Étoile non remplie */
 .star {
   width: 24px;
   height: 24px;
   fill: #E3E3E3;
   color: #E3E3E3;
+  font-size: 24px;
 }
 
+/* Étoile correspondant à la note du logement */
 .star.filled {
   fill: #FF6060;
   color: #FF6060;
 }
 
+/* Informations de l'hôte */
 .host-info {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
+/* Nom de l'hôte */
 .host-info p {
   color: #FF6060;
   font-size: 18px;
@@ -102,7 +107,7 @@
   margin: 0;
   line-height: 1.2;
 }
-
+/* Photo de profil de l'hôte */
 .host-info img {
   width: 64px;
   height: 64px;
@@ -110,20 +115,6 @@
   object-fit: cover;
 }
 
-/* Étoiles */
-.rating {
-  display: flex;
-  gap: 5px;
-}
-
-.star {
-  color: #E3E3E3;
-  font-size: 24px;
-}
-
-.star.filled {
-  color: #FF6060;
-}
 
 /* Collapses côte à côte */
 .housing-collapses {
@@ -131,17 +122,17 @@
   gap: 76px;
   margin-top: 30px;
 }
-
+/* Les deux Collapse occupent la même largeur */
 .housing-collapses > div {
   flex: 1;
 }
 
-/* Style de la barre Collapse */
+/* Conteneur d'un Collapse */
 .collapse {
   width: 100%;
   margin-bottom: 20px;
 }
-
+/* Barre cliquable du Collapse */
 .collapse-banner {
   background-color: #FF6060;
   color: white;
@@ -154,13 +145,13 @@
   font-weight: 500;
   font-size: 18px;
 }
-
+/* Titre du Collapse */
 .collapse-banner h2 {
   font-size: 18px;
   font-weight: 500;
   margin: 0;
 }
-
+/* Contenu affiché lorsque le Collapse est ouvert */
 .collapse-content {
   background-color: #f6f6f6;
   color: #000000;
@@ -168,7 +159,7 @@
   border-radius: 0 0 10px 10px;
   margin-top: -5px;
 }
-
+/* Suppression du style par défaut des listes */
 .collapse-content ul {
   list-style: none;
   padding: 0;
@@ -180,7 +171,7 @@
   .housing-header {
     flex-direction: column;
   }
-
+/* Les informations passent les unes sous les autres */
 .housing-host-rating {
   display: flex;
   flex-direction: column;
@@ -189,24 +180,24 @@
   gap: 15px;                   
   margin-top: 0;               
 }
-
+/* Réduction de la taille des tags */
   .tag {
     font-size: 10px;
     border-radius: 5px;
     min-width: auto;
   }
-
+ /* Les Collapse passent l'un sous l'autre */
   .housing-collapses {
     flex-direction: column;
     gap: 20px;
   }
 }
-
+/* Conteneur du diaporama */
 .slideshow {
   border-radius: 25px;
   overflow: hidden; 
 }
-
+/* Mise en forme des images du diaporama */
 .slideshow img {
   border-radius: 25px;
   width: 100%;

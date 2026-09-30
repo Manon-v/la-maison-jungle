@@ -1,5 +1,7 @@
+/* Import de la police Montserrat depuis Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
 
+/* Réinitialisation des styles par défaut et application de la police */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,6 +9,7 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+/* Style général de la page */
 body {
   width: 100%;
   margin: 0 auto;
@@ -14,24 +17,31 @@ body {
 }
 
 
+/* --------------- HEADER ----------------- */
 
-/* Header */
+/* Mise en page de l'en-tête */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 40px 0;
+  max-width: 1086px;
+  width: 100%;
+  margin: 0 auto;
 }
 
+/* Taille du logo */
 .header-logo {
   height: 68px;
 }
 
+/* Navigation principale */
 .header-nav {
   display: flex;
   gap: 50px;
 }
 
+/* Style des liens de navigation */
 .nav-link {
   font-size: 24px;
   font-weight: 500;
@@ -39,31 +49,57 @@ body {
   text-decoration: none;
 }
 
+/* Soulignement du lien au survol */
 .nav-link:hover {
   text-decoration: underline;
 }
 
-/* Responsive Header */
+
+/* ---------------- HEADER MOBILE ---------------- */
+
 @media (max-width: 768px) {
+
+  /* Réduction de l'espace autour du header */
   .header {
     padding: 20px 0;
   }
   
+  /* Réduction de la taille du logo */
   .header-logo {
     height: 47px;
   }
   
+  /* Réduction de l'espace entre les liens */
   .header-nav {
     gap: 20px;
   }
   
+  /* Adaptation des liens pour les petits écrans */
   .nav-link {
     font-size: 12px;
     text-transform: uppercase;
   }
 }
 
-/* Container de la grille Kasa */
+/* Adaptation pour les très petits écrans */
+@media (max-width: 350px) {
+  .header-logo {
+    height: 38px;
+  }
+
+  .header-nav {
+    gap: 10px;
+  }
+
+  .nav-link {
+    font-size: 10px;
+  }
+}
+
+
+/* ---------------- CARTES DES LOGEMENTS ---------------- */
+
+/* Grille contenant les différentes cartes de logements */
 .cards-container {
   background-color: #F6F6F6;
   border-radius: 25px;
@@ -74,7 +110,7 @@ body {
   margin-top: 40px;
 }
 
-/* Style des Cartes */
+/* Style d'une carte de logement */
 .card {
   position: relative;
   height: 340px;
@@ -84,21 +120,16 @@ body {
   text-decoration: none;
 }
 
+/* Image de la carte */
 .card-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.card-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
-}
 
+
+/* Titre du logement affiché sur la carte */
 .card-title {
   position: absolute;
   bottom: 20px;
@@ -111,8 +142,12 @@ body {
   z-index: 1;
 }
 
-/* Responsive Grille */
+
+/* ---------------- CARTES MOBILE ---------------- */
+
 @media (max-width: 768px) {
+
+  /* Passage de la grille à une seule colonne */
   .cards-container {
     background-color: transparent;
     padding: 0;
@@ -120,11 +155,16 @@ body {
     gap: 20px;
   }
   
+  /* Réduction de la hauteur des cartes */
   .card {
     height: 255px;
   }
 }
 
+
+/* ---------------- BANNIÈRE ---------------- */
+
+/* Conteneur principal de la bannière */
 .banner {
   position: relative;
   height: 223px;
@@ -137,6 +177,7 @@ body {
   width: 100%;
 }
 
+/* Image de fond de la bannière */
 .banner-img {
   width: 100%;
   height: 100%;
@@ -144,6 +185,7 @@ body {
   display: block;
 }
 
+/* Calque sombre placé sur l'image */
 .banner-overlay {
   position: absolute;
   top: 0;
@@ -153,6 +195,7 @@ body {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+/* Texte affiché au-dessus de la bannière */
 .banner-text {
   position: absolute;
   color: white;
@@ -162,6 +205,10 @@ body {
   z-index: 1;
 }
 
+
+/* ---------------- PAGE À PROPOS ---------------- */
+
+/* Organisation verticale des différents Collapse */
 .about-collapses {
   margin-top: 38px;
   display: flex;
@@ -169,11 +216,18 @@ body {
   gap: 30px; 
 }
 
+
+/* ---------------- BANNIÈRE MOBILE ---------------- */
+
 @media (max-width: 768px) {
+
+  /* Réduction de la bannière sur mobile */
   .banner {
     height: 111px;
     border-radius: 10px;
   }
+
+  /* Adaptation du texte de la bannière */
   .banner-text {
     font-size: 24px;
     left: 16px;
@@ -181,6 +235,10 @@ body {
   }
 }
 
+
+/* ---------------- FLÈCHE DU COLLAPSE -----------------*/
+
+/* Création de la flèche avec des bordures */
 .collapse-arrow {
   width: 10px;
   height: 10px;
@@ -191,6 +249,7 @@ body {
   margin-right: 5px;
 }
 
+/* Rotation de la flèche lorsque le Collapse est ouvert */
 .collapse-arrow.open {
   transform: rotate(225deg);
 }
