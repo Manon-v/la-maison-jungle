@@ -1,43 +1,50 @@
-import { useState } from 'react'
-// Composant qui permet d'afficher ou de masquer du contenu
+import { useId, useState } from 'react'
+
+// Bloc de contenu avec ouverture et fermeture animées
 export default function Collapse({ title, children, content }) {
-  // Le contenu est fermé par défaut
   const [isOpen, setIsOpen] = useState(false)
-// Change l'état du collapse pour l'ouvrir ou le fermer
+  const contentId = useId()
 
-  const toggleCollapse = () => {
-    setIsOpen(!isOpen)
-  }
-
-  // Détermine le contenu à afficher
-  const displayContent = children || (
+  const displayContent = children ?? (
     Array.isArray(content) ? (
-      // Si le contenu est un tableau, chaque élément est affiché dans une liste
       <ul>
         {content.map((item, index) => (
           <li key={index}>{item}</li>
         ))}
       </ul>
     ) : (
-      // Sinon, le contenu est affiché sous forme de texte
       <p>{content}</p>
     )
   )
 
   return (
     <div className="collapse">
-       {/* Un clic sur la bannière ouvre ou ferme le contenu */}
-      <div className="collapse-banner" onClick={toggleCollapse}>
-        <h2>{title}</h2>
-         {/* La classe "open" est ajoutée lorsque le collapse est ouvert */}
-       <span className={`collapse-arrow ${isOpen ? 'open' : ''}`}></span>
-      </div>
-      {/* Le contenu s'affiche uniquement lorsque le collapse est ouvert */}
-      {isOpen && (
-        <div className="collapse-content">
-          {displayContent}
+      <button
+        type="button"
+        className="collapse-banner"
+        onClick={() => setIsOpen((prev) => !prev)}
+        aria-expanded={isOpen}
+        aria-controls={contentId}
+      >
+        <span className="collapse-title">{title}</span>
+
+        <span
+          className={`collapse-arrow ${isOpen ? 'open' : ''}`}
+          aria-hidden="true"
+        />
+      </button>
+
+      <div
+        id={contentId}
+        className={`collapse-panel ${isOpen ? 'is-open' : ''}`}
+        inert={!isOpen}
+      >
+        <div className="collapse-inner">
+          <div className="collapse-content">
+            {displayContent}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }

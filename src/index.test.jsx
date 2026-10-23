@@ -1,19 +1,15 @@
-import { render, fireEvent, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import { describe, it, expect } from 'vitest';
-import Card from './components/Card';
-import Banner from './components/Banner';
-import Collapse from './components/Collapse';
-import Slideshow from './components/Slideshow';
+import { render, fireEvent, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { describe, it, expect } from 'vitest'
 
+import Card from './components/Card'
+import Banner from './components/Banner'
+import Collapse from './components/Collapse'
+import Slideshow from './components/Slideshow'
 
-/* --------------- TEST CARD ---------------- */
-
+/* CARD */
 describe('Card', () => {
-  it('affiche le titre et l’image du logement', () => {
-
-    // Affichage du composant Card avec des données de test
-    // MemoryRouter est nécessaire car Card contient un Link
+  it('affiche le titre, la bonne image et le lien du logement', () => {
     render(
       <MemoryRouter>
         <Card
@@ -22,152 +18,211 @@ describe('Card', () => {
           cover="/image-test.jpg"
         />
       </MemoryRouter>
-    );
+    )
 
-    // Vérifie que le titre du logement est affiché
     expect(
       screen.getByRole('heading', { name: 'Logement de test' })
-    ).toBeInTheDocument();
+    ).toBeInTheDocument()
 
-    // Vérifie que l'image du logement est affichée
     expect(
       screen.getByRole('img', { name: 'Logement de test' })
-    ).toBeInTheDocument();
+    ).toHaveAttribute('src', '/image-test.jpg')
 
-    // Récupère le lien de la Card
-    const link = screen.getByRole('link', {
-      name: /Logement de test/i,
-    });
-
-    // Vérifie que le lien mène vers le bon logement
-    expect(link).toHaveAttribute('href', '/housing/123');
-
-    // Vérifie que la bonne image est utilisée
     expect(
-      screen.getByRole('img', { name: 'Logement de test' })
-    ).toHaveAttribute('src', '/image-test.jpg');
-  });
-});
+      screen.getByRole('link', { name: /Logement de test/i })
+    ).toHaveAttribute('href', '/housing/123')
+  })
+})
 
-
-/* ---------------- TEST BANNER ---------------- */
-
+/* BANNER */
 describe('Banner', () => {
-  it('affiche l’image et le texte de la bannière', () => {
-
-    // Affichage du composant Banner avec une image et un texte de test
+  it('affiche la bonne image et le texte', () => {
     render(
       <Banner
         image="/banner-test.jpg"
         text="Chez vous, partout et ailleurs"
       />
-    );
+    )
 
-    // Vérifie que l'image de la bannière est affichée
     expect(
       screen.getByRole('img', { name: 'Bannière' })
-    ).toBeInTheDocument();
+    ).toHaveAttribute('src', '/banner-test.jpg')
 
-    // Vérifie que la bonne image est utilisée
-    expect(
-      screen.getByRole('img', { name: 'Bannière' })
-    ).toHaveAttribute('src', '/banner-test.jpg');
-
-    // Vérifie que le texte de la bannière est affiché
     expect(
       screen.getByRole('heading', {
-        name: 'Chez vous, partout et ailleurs',
+        name: 'Chez vous, partout et ailleurs'
       })
-    ).toBeInTheDocument();
-  });
-});
+    ).toBeInTheDocument()
+  })
 
+  it('affiche une bannière sans titre si aucun texte n’est fourni', () => {
+    render(<Banner image="/banner-test.jpg" />)
 
-/* ---------------- TEST COLLAPSE ---------------- */
+    expect(
+      screen.getByRole('img', { name: 'Bannière' })
+    ).toBeInTheDocument()
 
+    expect(screen.queryByRole('heading')).not.toBeInTheDocument()
+  })
+})
+
+/* COLLAPSE */
 describe('Collapse', () => {
   it('ouvre et ferme le contenu au clic', () => {
-
-    // Affichage du Collapse avec un titre et un contenu de test
     render(
       <Collapse
         title="Description"
         content="Voici la description du logement"
       />
-    );
+    )
 
-    // Le contenu est fermé au départ
-    expect(
-      screen.queryByText('Voici la description du logement')
-    ).not.toBeInTheDocument();
+    const button = screen.getByRole('button', {
+      name: 'Description'
+    })
 
-    // Récupère le titre du Collapse
-    const title = screen.getByRole('heading', {
-      name: 'Description',
-    });
+    const panel = document.getElementById(
+      button.getAttribute('aria-controls')
+    )
 
-    // Simule un clic pour ouvrir le Collapse
-    fireEvent.click(title.parentElement);
-
-    // Vérifie que le contenu apparaît après le clic
+    // Le contenu reste dans le DOM pour permettre l’animation
     expect(
       screen.getByText('Voici la description du logement')
-    ).toBeInTheDocument();
+    ).toBeInTheDocument()
 
-    // Simule un deuxième clic pour fermer le Collapse
-    fireEvent.click(title.parentElement);
+    expect(button).toHaveAttribute('aria-expanded', 'false')
+    expect(panel).toHaveAttribute('inert')
 
-    // Vérifie que le contenu a de nouveau disparu
-    expect(
-      screen.queryByText('Voici la description du logement')
-    ).not.toBeInTheDocument();
-  });
-});
+    fireEvent.click(button)
 
+    expect(button).toHaveAttribute('aria-expanded', 'true')
+    expect(panel).not.toHaveAttribute('inert')
 
-/* ---------------- TEST SLIDESHOW ---------------- */
+    fireEvent.click(button)
 
+    expect(button).toHaveAttribute('aria-expanded', 'false')
+    expect(panel).toHaveAttribute('inert')
+  })
+
+  it('affiche une liste lorsque le contenu est un tableau', () => {
+    render(
+      <Collapse
+        title="Équipements"
+        content={['Wi-Fi', 'Cuisine']}
+      />
+    )
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Équipements' })
+    )
+
+    expect(screen.getAllByRole('listitem')).toHaveLength(2)
+    expect(screen.getByText('Wi-Fi')).toBeInTheDocument()
+    expect(screen.getByText('Cuisine')).toBeInTheDocument()
+  })
+
+  it('affiche les enfants fournis en priorité', () => {
+    render(
+      <Collapse title="Description" content="Texte de secours">
+        <p>Contenu personnalisé</p>
+      </Collapse>
+    )
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Description' })
+    )
+
+    expect(screen.getByText('Contenu personnalisé')).toBeInTheDocument()
+    expect(screen.queryByText('Texte de secours')).not.toBeInTheDocument()
+  })
+})
+
+/* SLIDESHOW */
 describe('Slideshow', () => {
-  it('change d’image avec les boutons précédent et suivant', () => {
+  const pictures = [
+    '/image1.jpg',
+    '/image2.jpg',
+    '/image3.jpg'
+  ]
 
-    // Création de trois images pour le test
-    const pictures = [
-      '/image1.jpg',
-      '/image2.jpg',
-      '/image3.jpg',
-    ];
+  it('change de photo et met à jour le compteur', () => {
+    render(<Slideshow pictures={pictures} />)
 
-    // Affichage du Slideshow avec les images de test
-    render(<Slideshow pictures={pictures} />);
+    const nextButton = screen.getByRole('button', {
+      name: 'Image suivante'
+    })
 
-    // Vérifie que la première image est affichée au départ
+    const prevButton = screen.getByRole('button', {
+      name: 'Image précédente'
+    })
+
     expect(
       screen.getByRole('img', { name: 'Diapositive 1' })
-    ).toHaveAttribute('src', '/image1.jpg');
+    ).toHaveAttribute('src', '/image1.jpg')
 
-    // Vérifie que le compteur commence à 1/3
-    expect(screen.getByText('1/3')).toBeInTheDocument();
+    expect(screen.getByText('1/3')).toBeInTheDocument()
 
-    // Simule un clic sur la flèche suivante
-    fireEvent.click(screen.getByRole('button', { name: '❯' }));
+    fireEvent.click(nextButton)
 
-    // Vérifie que la deuxième image est maintenant affichée
     expect(
       screen.getByRole('img', { name: 'Diapositive 2' })
-    ).toHaveAttribute('src', '/image2.jpg');
+    ).toHaveAttribute('src', '/image2.jpg')
 
-    // Vérifie que le compteur est passé à 2/3
-    expect(screen.getByText('2/3')).toBeInTheDocument();
+    expect(screen.getByText('2/3')).toBeInTheDocument()
 
-    // Simule un clic sur la flèche précédente
-    fireEvent.click(screen.getByRole('button', { name: '❮' }));
+    fireEvent.click(prevButton)
 
-    // Vérifie que la première image est de nouveau affichée
     expect(
       screen.getByRole('img', { name: 'Diapositive 1' })
-    ).toHaveAttribute('src', '/image1.jpg');
+    ).toHaveAttribute('src', '/image1.jpg')
 
-    // Vérifie que le compteur est revenu à 1/3
-    expect(screen.getByText('1/3')).toBeInTheDocument();
-  });
-});
+    expect(screen.getByText('1/3')).toBeInTheDocument()
+  })
+
+  it('passe de la première à la dernière photo et inversement', () => {
+    render(<Slideshow pictures={pictures} />)
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Image précédente' })
+    )
+
+    expect(
+      screen.getByRole('img', { name: 'Diapositive 3' })
+    ).toHaveAttribute('src', '/image3.jpg')
+
+    expect(screen.getByText('3/3')).toBeInTheDocument()
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Image suivante' })
+    )
+
+    expect(
+      screen.getByRole('img', { name: 'Diapositive 1' })
+    ).toHaveAttribute('src', '/image1.jpg')
+
+    expect(screen.getByText('1/3')).toBeInTheDocument()
+  })
+
+  it('masque la navigation lorsqu’il n’y a qu’une photo', () => {
+    render(<Slideshow pictures={['/image1.jpg']} />)
+
+    expect(screen.getByRole('img')).toHaveAttribute(
+      'src',
+      '/image1.jpg'
+    )
+
+    expect(screen.queryByRole('button')).not.toBeInTheDocument()
+    expect(screen.queryByText('1/1')).not.toBeInTheDocument()
+  })
+
+  it('n’affiche rien lorsque le tableau de photos est vide', () => {
+    const { container } = render(<Slideshow pictures={[]} />)
+
+    expect(container).toBeEmptyDOMElement()
+  })
+
+  it('n’affiche rien lorsque les photos ne sont pas fournies', () => {
+    const { container } = render(<Slideshow />)
+
+    expect(container).toBeEmptyDOMElement()
+  })
+})

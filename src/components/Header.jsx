@@ -1,31 +1,23 @@
-import { NavLink } from 'react-router-dom';
-import logo from '../assets/logo.svg'; 
+import { Link, NavLink } from 'react-router-dom'
+import logo from '../assets/LOGO.svg'
 
-// Composant qui affiche l'en-tête du site
-function Header() {
+// En-tête et navigation principale du site
+export default function Header() {
   return (
     <header className="header">
-      {/* Affichage du logo Kasa */}
-      <img src={logo} alt="Kasa" className="header-logo" />
-      {/* Menu de navigation principal */}
-      <nav className="header-nav">
-        {/* Lien vers la page d'accueil */}
-        <NavLink 
-          to="/" 
-          className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
-        >
+      <Link to="/" aria-label="Kasa — Accueil">
+        <img src={logo} alt="Kasa" className="header-logo" />
+      </Link>
+
+      <nav className="header-nav" aria-label="Navigation principale">
+        <NavLink to="/" end className="nav-link">
           Accueil
         </NavLink>
-        {/* Lien vers la page À Propos */}
-        <NavLink 
-          to="/about" 
-          className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
-        >
-          A Propos
+
+        <NavLink to="/about" className="nav-link">
+          À propos
         </NavLink>
       </nav>
     </header>
-  );
+  )
 }
-
-export default Header;

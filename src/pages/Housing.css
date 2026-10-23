@@ -1,113 +1,83 @@
-/* Conteneur principal de la page logement */
+/* PAGE LOGEMENT */
 .housing-page {
-  max-width: 1240px;
+  width: 100%;
   margin: 0 auto;
-  padding: 20px;
 }
 
-/* En-tête : Titre + Hôte */
+/* TITRE, LOCALISATION ET TAGS */
 .housing-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 15px;
-  margin-bottom: 20px;
-  
+  gap: 20px;
+  margin: 15px 0 20px;
 }
-/* Conteneur du titre et de la localisation */
+
 .housing-title-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  min-width: 0;
   text-align: left;
-}
-/* Titre du logement */
-.housing-title-container h1 {
-  color: #FF6060;
-  font-size: 36px;
-  font-weight: 500;
-  margin: 0 0 5px 0;
-  text-align: left;
-  font-family: 'Montserrat', sans-serif;
-  
-}
-/* Localisation du logement */
-.housing-location {
-  font-size: 18px;
-  font-weight: 500;
-  margin: 0 0 20px 0;
-  color: #000000;
-  text-align: left;
-  
 }
 
-/* Tags */
+.housing-title-container h1 {
+  margin-bottom: 5px;
+  color: #ff6060;
+  font-size: 36px;
+  font-weight: 500;
+}
+
+.housing-location {
+  margin-bottom: 20px;
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+}
+
 .housing-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: flex-start;
 }
-/* Style de chaque tag */
+
 .tag {
-  background-color: #FF6060;
-  color: #FFFFFF;
-  padding: 5px 15px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 700;
-  min-width: 115px;
-  text-align: center;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-width: 115px;
+  padding: 5px 15px;
+  border-radius: 10px;
+  background-color: #ff6060;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
 }
 
-/* Hôte & Étoiles */
+/* HÔTE ET NOTE */
 .housing-host-rating {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: space-between;
   gap: 20px;
-}
-/* Affichage des étoiles de notation */
-.rating {
-  display: flex;
-  gap: 5px;
+  flex-shrink: 0;
 }
 
-/* Étoile non remplie */
-.star {
-  width: 24px;
-  height: 24px;
-  fill: #E3E3E3;
-  color: #E3E3E3;
-  font-size: 24px;
-}
-
-/* Étoile correspondant à la note du logement */
-.star.filled {
-  fill: #FF6060;
-  color: #FF6060;
-}
-
-/* Informations de l'hôte */
 .host-info {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-/* Nom de l'hôte */
+
 .host-info p {
-  color: #FF6060;
+  color: #ff6060;
   font-size: 18px;
   font-weight: 500;
-  text-align: right;
-  margin: 0;
   line-height: 1.2;
+  text-align: right;
 }
-/* Photo de profil de l'hôte */
+
 .host-info img {
   width: 64px;
   height: 64px;
@@ -115,92 +85,290 @@
   object-fit: cover;
 }
 
+.rating {
+  display: flex;
+  gap: 5px;
+}
 
-/* Collapses côte à côte */
+.star {
+  width: 24px;
+  height: 24px;
+  fill: #e3e3e3;
+  color: #e3e3e3;
+  font-size: 24px;
+}
+
+.star.filled {
+  fill: #ff6060;
+  color: #ff6060;
+}
+
+/* CARROUSEL */
+.slideshow {
+  position: relative;
+  height: 415px;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.slideshow .slideshow-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slideshow .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 96px;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.slideshow .arrow-left {
+  left: 16px;
+}
+
+.slideshow .arrow-right {
+  right: 16px;
+}
+
+.slideshow .arrow svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 8;
+}
+
+.slideshow .arrow:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+}
+
+.slideshow-counter {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* DISPOSITION DES BLOCS DU LOGEMENT */
 .housing-collapses {
   display: flex;
+  align-items: flex-start;
   gap: 76px;
   margin-top: 30px;
 }
-/* Les deux Collapse occupent la même largeur */
-.housing-collapses > div {
+
+.housing-collapses > .collapse {
   flex: 1;
+  min-width: 0;
 }
 
-/* Conteneur d'un Collapse */
+/* COMPOSANT COLLAPSE : STYLES COMMUNS AUX PAGES */
 .collapse {
   width: 100%;
-  margin-bottom: 20px;
 }
-/* Barre cliquable du Collapse */
+
 .collapse-banner {
-  background-color: #FF6060;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #ff6060;
+  color: #fff;
+  font-family: inherit;
+  text-align: left;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 18px;
-}
-/* Titre du Collapse */
-.collapse-banner h2 {
-  font-size: 18px;
-  font-weight: 500;
-  margin: 0;
-}
-/* Contenu affiché lorsque le Collapse est ouvert */
-.collapse-content {
-  background-color: #f6f6f6;
-  color: #000000;
-  padding: 20px;
-  border-radius: 0 0 10px 10px;
-  margin-top: -5px;
-}
-/* Suppression du style par défaut des listes */
-.collapse-content ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
-/* Adaptatif Mobile */
+.collapse-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.collapse-banner:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 3px;
+}
+
+.collapse-content {
+  padding: 20px;
+  margin-top: -5px;
+  border-radius: 0 0 10px 10px;
+  background-color: #f6f6f6;
+  color: #000;
+  text-align: left;
+}
+
+.collapse-content ul {
+  list-style: none;
+}
+
+/* ANIMATION D’OUVERTURE ET DE FERMETURE */
+.collapse-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    grid-template-rows 350ms ease,
+    opacity 350ms ease,
+    visibility 350ms ease;
+}
+
+.collapse-panel.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+}
+
+.collapse-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* VERSION MOBILE */
 @media (max-width: 768px) {
   .housing-header {
     flex-direction: column;
+    gap: 16px;
+    margin: 15px 0 16px;
   }
-/* Les informations passent les unes sous les autres */
-.housing-host-rating {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-start; 
-  gap: 15px;                   
-  margin-top: 0;               
-}
-/* Réduction de la taille des tags */
+
+  .housing-title-container {
+    width: 100%;
+  }
+
+  .housing-title-container h1 {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .housing-location {
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
   .tag {
-    font-size: 10px;
+    min-width: 84px;
+    min-height: 18px;
+    padding: 2px 10px;
     border-radius: 5px;
-    min-width: auto;
+    font-size: 10px;
   }
- /* Les Collapse passent l'un sous l'autre */
+
+  /* Étoiles à gauche, hôte à droite */
+  .housing-host-rating {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .rating {
+    order: 0;
+    gap: 4px;
+  }
+
+  .star {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+  }
+
+  .host-info {
+    order: 1;
+  }
+
+  .host-info p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .host-info img {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Carrousel */
+  .slideshow {
+    height: 255px;
+    border-radius: 10px;
+  }
+
+  .slideshow .arrow {
+    width: 32px;
+    height: 44px;
+    padding: 6px;
+  }
+
+  .slideshow .arrow-left {
+    left: 4px;
+  }
+
+  .slideshow .arrow-right {
+    right: 4px;
+  }
+
+  .slideshow-counter {
+    display: none;
+  }
+
+  /* Blocs Description et Équipements */
   .housing-collapses {
     flex-direction: column;
     gap: 20px;
+    margin-top: 0;
+  }
+
+  .housing-collapses > .collapse {
+    flex: none;
+  }
+
+  .housing-collapses .collapse-banner {
+    min-height: 30px;
+    padding: 7px 10px;
+    border-radius: 5px;
+  }
+
+  .housing-collapses .collapse-title {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .housing-collapses .collapse-content {
+    padding: 15px;
+    font-size: 12px;
+    line-height: 1.5;
   }
 }
-/* Conteneur du diaporama */
-.slideshow {
-  border-radius: 25px;
-  overflow: hidden; 
-}
-/* Mise en forme des images du diaporama */
-.slideshow img {
-  border-radius: 25px;
-  width: 100%;
-  height: 415px;
-  object-fit: cover;
+
+/* ACCESSIBILITÉ : RÉDUCTION DES ANIMATIONS */
+@media (prefers-reduced-motion: reduce) {
+  .collapse-panel,
+  .collapse-arrow {
+    transition: none;
+  }
 }

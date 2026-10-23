@@ -1,29 +1,27 @@
-/* Style général de la page */
 body {
   margin: 0;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #fff;
+  color: #000;
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Conteneur principal de l'application React */
 #root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
+  width: 100%;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
+  text-align: center;
 }
 
-/* Le contenu principal occupe l'espace disponible */
 main {
   flex: 1;
+  width: calc(100% - 40px);
+  max-width: 1126px;
+  margin: 0 auto;
+  min-width: 0;
 }
 
-/* Suppression des marges par défaut des paragraphes */
 p {
   margin: 0;
 }
+
