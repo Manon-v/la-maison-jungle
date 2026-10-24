@@ -2,10 +2,10 @@ import { render, fireEvent, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, it, expect } from 'vitest'
 
-import Card from './components/Card'
-import Banner from './components/Banner'
-import Collapse from './components/Collapse'
-import Slideshow from './components/Slideshow'
+import Card from '../src/components/Card'
+import Banner from '../src/components/Banner'
+import Collapse from '../src/components/Collapse'
+import Slideshow from '../src/components/Slideshow'
 
 /* CARD */
 describe('Card', () => {
