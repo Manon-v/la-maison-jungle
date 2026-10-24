@@ -1,16 +1,72 @@
-# React + Vite
+# Kasa — Application de location immobilière
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Projet réalisé dans le cadre de la formation Testeur logiciel d’OpenClassrooms.
 
-Currently, two official plugins are available:
+Application développée avec React, Vite et React Router : liste des logements, fiches détaillées, galerie photo, menus déroulants et page 404.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Prérequis
 
-## React Compiler
+- Node.js et npm installés.
+- Le backend fourni par OpenClassrooms, à télécharger séparément :
+  https://github.com/OpenClassrooms-Student-Center/TesteurLogiciel_appli_location_immobiliere_React
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Lancer le backend
 
-## Expanding the Oxlint configuration
+Dans un terminal ouvert dans le dossier `backend` du projet fourni :
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```bash
+npm install
+npm start
+```
+
+Le backend est accessible sur http://localhost:8080.
+Garder ce terminal ouvert pendant l’utilisation du site.
+
+## Lancer le frontend
+
+Dans un autre terminal, à la racine de ce dépôt :
+
+```bash
+npm install
+npm run dev
+```
+
+Ouvrir l’adresse indiquée par Vite dans le terminal.
+
+## Récupération des données
+
+Les pages d’accueil et de détail récupèrent les données du backend avec `fetch`.
+
+- Liste des logements : `GET /api/properties`
+- Détail d’un logement : `GET /api/properties/:id`
+
+Un identifiant de logement inexistant redirige vers la page 404.
+Un message s’affiche pendant le chargement ou en cas d’erreur de récupération.
+
+## Tests unitaires
+
+Les tests se trouvent dans `Tests/index.test.jsx`.
+Ils vérifient les composants Card, Banner, Collapse et Slideshow.
+
+Lancer les tests :
+
+```bash
+npm run test
+```
+
+Afficher la couverture :
+
+```bash
+npm run test:coverage
+```
+
+Résultat : 11 tests réussis et 100 % de couverture sur ces quatre composants.
+Ce pourcentage ne couvre pas les pages ni leurs appels API.
+
+## Compilation
+
+```bash
+npm run build
+```
+
+Les fichiers de production sont générés dans le dossier `dist`.
