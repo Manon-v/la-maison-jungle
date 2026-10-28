@@ -8,7 +8,7 @@ export default function Card({ id, title, cover }) {
       {/* Affichage de l'image du logement */}
       <img src={cover} alt={title} className="card-image" />
       {/* Affichage du titre du logement */}
-      <h3 className="card-title">{title}</h3>
+      <h2 className="card-title">{title}</h2>
     </Link>
   );
 }

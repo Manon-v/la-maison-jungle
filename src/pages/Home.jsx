@@ -42,7 +42,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main>
+  <div className="home-page">
       <Banner image={bannerImg} text="Chez vous, partout et ailleurs" />
 
       {chargement && <p role="status">Chargement des logements…</p>}
@@ -63,6 +63,6 @@ export default function Home() {
           />
         ))}
       </div>
-    </main>
-  )
+      </div>
+)
 }

@@ -5,17 +5,17 @@ export default function Collapse({ title, children, content }) {
   const [isOpen, setIsOpen] = useState(false)
   const contentId = useId()
 
-  const displayContent = children ?? (
-    Array.isArray(content) ? (
-      <ul>
-        {content.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
-    ) : (
-      <p>{content}</p>
-    )
+const displayContent = children ?? (
+  Array.isArray(content) ? (
+    <ul>
+      {content.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  ) : (
+    <p>{content}</p>
   )
+)
 
   return (
     <div className="collapse">

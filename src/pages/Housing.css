@@ -2,6 +2,7 @@
 .housing-page {
   width: 100%;
   margin: 0 auto;
+  max-width: 1240px;
 }
 
 /* TITRE, LOCALISATION ET TAGS */
@@ -231,9 +232,9 @@
   opacity: 0;
   visibility: hidden;
   transition:
-    grid-template-rows 350ms ease,
-    opacity 350ms ease,
-    visibility 350ms ease;
+  grid-template-rows 350ms ease,
+  opacity 350ms ease,
+  visibility 350ms ease;
 }
 
 .collapse-panel.is-open {

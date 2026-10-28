@@ -16,7 +16,7 @@ body {
 main {
   flex: 1;
   width: calc(100% - 40px);
-  max-width: 1126px;
+  max-width: 1240px;
   margin: 0 auto;
   min-width: 0;
 }
